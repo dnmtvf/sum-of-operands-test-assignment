@@ -1,0 +1,11 @@
+.ExerciseEquation {
+	margin: 0 auto;
+	text-align: center;
+	font-size: 2.5rem;
+}
+
+.ExerciseEquation-isHighlighted {
+	background-color: orange;
+  padding: 0 6px;
+  border-radius: 3px;
+}
