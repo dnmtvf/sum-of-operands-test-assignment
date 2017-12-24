@@ -5,30 +5,29 @@ import './UserInput.css';
 class UserInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { userInput: null };
+    this.state = { userInput: null, isInputWrong: false };
   }
 
   render() {
     if (this.state.userInput === this.props.correctAnswer) {
       return (
-        <div className="UserInput-Form UserInput-AnswerCorrect" style={this.props.position}>
+        <div className="UserInput-Form UserInput-Answer_isCorrect" style={this.props.position}>
           {this.props.correctAnswer}
         </div>
       );
     }
-    const isWrong = this.state.userInput !== null
-      && !isNaN(this.state.userInput)
-      && this.state.userInput !== this.props.correctAnswer;
     return(
       <form className="UserInput-Form" style={this.props.position}>
         <input
           type="text"
           size="1"
+          maxLength="1"
           onChange={(e) => {
-            this.props.handleChange(parseInt(e.target.value, 10));
-            this.setState({ userInput: parseInt(e.target.value, 10) });
+            const userInput = e.target.value.trim() !== '' ? parseInt(e.target.value, 10) : null;
+            this.props.handleChange(userInput);
+            this.setState({ userInput, isInputWrong: e.target.value.trim() !== '' && userInput !== this.props.correctAnswer });
           }}
-          className={classNames({ 'UserInput-Form_isWrong': isWrong }, 'UserInput-FormInput')}
+          className={classNames({ 'UserInput-Form_isWrong': this.state.isInputWrong }, 'UserInput-FormInput')}
         />
       </form>
     );

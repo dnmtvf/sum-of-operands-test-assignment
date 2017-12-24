@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import './SumOfOperands.css';
-import getNewExerсize from './getNewExerсize';
 import ExerciseEquation from './Components/ExerciseEquation/ExerciseEquation';
 import Axis from './Components/Axis/Axis';
-import './bootstrap-reboot.min.css';
 
 class SumOfOperands extends Component {
   constructor(props) {
     super(props);
-    const exercise = getNewExerсize();
     this.state = {
-      operands: exercise.operands,
-      sum: exercise.sum,
-      currentQuestion: { id: 0, answer: exercise.operands[0], userInput: null },
+      operands: this.props.exercise.operands,
+      sum: this.props.exercise.sum,
+      currentQuestion: { id: 0, answer: this.props.exercise.operands[0], userInput: null },
     };
     this.userInputHandleChange = this.userInputHandleChange.bind(this);
   }
@@ -47,7 +44,6 @@ class SumOfOperands extends Component {
           sum={this.state.sum}
         />
         <Axis
-          className="CountNumsExercise-Axis"
           intervals={this.state.operands}
           currentStep={this.state.currentQuestion.id}
           handleChange={this.userInputHandleChange}

@@ -3,7 +3,6 @@
   width: auto;
   padding: 0 6px;
   transform: translate(-50%, -50%);
-
   font-size: 1.5rem;
 }
 
@@ -13,7 +12,7 @@
   text-align: center;
 }
 
-.UserInput-AnswerCorrect {
+.UserInput-Answer_isCorrect {
   text-align: center;
 }
 

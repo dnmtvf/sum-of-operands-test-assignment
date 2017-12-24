@@ -16,12 +16,10 @@ const ListArcs = (props) => {
     const prevInterval = props.intervals[index - 1];
     const startPt = index === 0 ? getPoint(0) : getPoint(prevInterval);
     const endPt = index === 0 ? getPoint(interval) : getPoint(interval + prevInterval);
-    if (index <= props.limit) {
-      return <Curve startPt={startPt} endPt={endPt} key={index} />;
-    }
+    return <Curve startPt={startPt} endPt={endPt} key={index} />;
   });
 
-  return <Layer>{arcList}</Layer>;
+  return <Layer>{arcList.filter((item, index) => index <= props.limit)}</Layer>;
 };
 
 const ListInputs = (props) => {
@@ -29,22 +27,18 @@ const ListInputs = (props) => {
     const prevInterval = props.intervals[index - 1];
     const left = index === 0 ? getX(getPoint(interval / 2))
       : getX(getPoint(prevInterval + (interval / 2)));
-    const top = index === 0 ? getYForInput(getPoint(interval))
-      : getYForInput(getPoint(interval));
-
-    if (index <= props.limit) {
-      return(
-        <UserInput
-          position={{ left, top }}
-          correctAnswer={interval}
-          handleChange={props.handleChange}
-          key={index}
-        />
-      );
-    }
+    const top = getYForInput(getPoint(interval));
+    return (
+      <UserInput
+        position={{ left, top }}
+        correctAnswer={interval}
+        handleChange={props.handleChange}
+        key={index}
+      />
+    );
   });
 
-  return <div>{inputList}</div>;
+  return <div>{inputList.filter((item, index) => index <= props.limit)}</div>;
 };
 
 const Axis = props => (

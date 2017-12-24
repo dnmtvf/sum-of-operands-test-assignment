@@ -6,7 +6,7 @@ import SumInput from './SumInput';
 const ExerciseEquation = (props) => {
   const operandList = props.operands.map((item, index) => {
     const isHighlighted = props.userInput !== null
-      && props.userInput !== item
+      && item !== props.userInput
       && index === props.currentStep;
     return (
       <span key={index}>

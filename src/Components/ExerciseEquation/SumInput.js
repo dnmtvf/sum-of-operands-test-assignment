@@ -8,7 +8,7 @@ class SumInput extends React.Component {
     this.state = { userInput: null };
   }
   render() {
-    if (this.state.userInput === this.props.sum) {
+    if (parseInt(this.state.userInput, 10) === this.props.sum) {
       return (
         <span>
           {this.props.sum}
@@ -16,16 +16,21 @@ class SumInput extends React.Component {
       );
     }
 
-const isWrong = this.state.userInput !== null
-  && !isNaN(this.state.userInput)
-  && this.state.userInput !== this.props.sum;
+    const isWrong = Number.isNaN(this.state.userInput)
+      || (this.state.userInput !== null
+      && this.state.userInput.toString(10).length === this.props.sum.toString(10).length)
+      || (this.state.userInput !== null
+        && parseInt(this.state.userInput.toString(10)[0], 10)
+          > parseInt(this.props.sum.toString(10)[0], 10));
+
     return (
       <form className="SumInput-SumForm">
         <input
           type="text"
           size="2"
+          maxLength="2"
           onChange={(e) => {
-            this.setState({ userInput: parseInt(e.target.value, 10) });
+            this.setState({ userInput: e.target.value.trim() !== '' ? parseInt(e.target.value, 10) : null });
           }}
           className={classNames({ 'SumInput-Input_isWrong': isWrong }, 'SumInput-Input')}
         />

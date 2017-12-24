@@ -1,18 +1,17 @@
 import React from 'react';
-import axis from './sprite.png';
 import { Image } from 'react-konva';
+import axis from './sprite.png';
 
 class AxisSprite extends React.Component {
-  state = {
-    image: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = { image: null };
+  }
   componentDidMount() {
     const image = new window.Image();
     image.src = axis;
     image.onload = () => {
-      this.setState({
-        image: image
-      });
+      this.setState({ image });
     };
   }
 
