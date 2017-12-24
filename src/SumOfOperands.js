@@ -15,8 +15,7 @@ class SumOfOperands extends Component {
   }
 
   userInputHandleChange(num) {
-    const isCorrect = num === this.state.currentQuestion.answer;
-    if (isCorrect) {
+    if (num === this.state.currentQuestion.answer) {
       this.setState(prevState => ({
         currentQuestion: {
           id: prevState.currentQuestion.id + 1,
